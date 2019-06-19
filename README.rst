@@ -5,7 +5,7 @@ GlorpenPropelBundle
 .. image:: https://travis-ci.org/glorpen/GlorpenPropelBundle.png?branch=master
 
 
-Additional Propel integration for Symfony2.
+Additional Propel integration for Symfony.
 
 Official repositories
 =====================
@@ -18,12 +18,12 @@ GitHub: https://github.com/glorpen/GlorpenPropelBundle - main repo
 
 BitBucket: https://bitbucket.org/glorpen/glorpenpropelbundle
 
-Supported Symfony2 versions
+Supported Symfony versions
 ===========================
 
-This bundle currently supports Symfony2 starting from version 2.3. 
+This bundle currently supports Symfony starting from version 2.3. 
 
-You will have to specify dev dependency for `propel/propel-bundle` for Symfony2 3.x projects, eg:
+You will have to specify dev dependency for `propel/propel-bundle` for Symfony 3.x projects, eg:
 
 .. sourcecode:: json
 
