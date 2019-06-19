@@ -30,3 +30,9 @@ matrix:
       env: SYMFONY_VERSION="4.0.2 as 3.99" PROPEL_VERSION="1.6.x-dev" FRAMEWORK_VERSION="4.0.2 as 3.99"
     - php: 7.2
       env: SYMFONY_VERSION="4.0.x-dev as 3.99" PROPEL_VERSION="1.6.x-dev" FRAMEWORK_VERSION="4.0.x-dev as 3.99"
+    - php: 7.2
+      env: SYMFONY_VERSION="4.1 as 3.99" PROPEL_VERSION="1.6.x-dev" FRAMEWORK_VERSION="4.1 as 3.99"
+    - php: 7.2
+      env: SYMFONY_VERSION="4.2 as 3.99" PROPEL_VERSION="1.6.x-dev" FRAMEWORK_VERSION="4.2 as 3.99"
+    - php: 7.3
+      env: SYMFONY_VERSION="4.3 as 3.99" PROPEL_VERSION="1.6.x-dev" FRAMEWORK_VERSION="4.3 as 3.99"
