@@ -31,7 +31,7 @@ class ClassEventDispatcher
 
             $this->dispatchers[$class] = new $cls();
 
-            if(class_exists($this->legacyDispatcherProxyClass)) {
+            if (class_exists($this->legacyDispatcherProxyClass)) {
                 $proxy = $this->legacyDispatcherProxyClass;
                 $this->dispatchers[$class] = $proxy::decorate($this->dispatchers[$class]);
             }
