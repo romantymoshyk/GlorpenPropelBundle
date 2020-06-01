@@ -4,7 +4,7 @@
     "type": "symfony-bundle",
     "license": "GPL-3.0",
     "require": {
-    	"symfony/symfony": ">=2.3,<5.0",
+    	"symfony/symfony": ">=2.3,<5.1",
         "propel/propel-bundle": "1.*"
     },
     "require-dev": {
