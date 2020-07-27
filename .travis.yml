@@ -6,7 +6,7 @@ before_script:
 
 script:
   - vendor/bin/phpunit
-  - vendor/bin/phpcs --standard=PSR1,PSR2 --ignore=Behaviors ./src
+  - vendor/bin/phpcs --standard=PSR1,PSR2 --ignore=Behaviors,Tests ./src
 
 matrix:
   include:

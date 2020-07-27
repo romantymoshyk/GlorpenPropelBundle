@@ -57,12 +57,12 @@ class SymfonyServicesTest extends WebTestCase
     {
         $def = $c->register('test.events1', 'Glorpen\Propel\PropelBundle\Tests\Fixtures\Services\EventTester');
         $def->setPublic(true);
-        $def->addTag('propel.event', array('event'=>'model.save', 'method'=>'handleEvent'));
+        $def->addTag('propel.event', array('event' => 'model.save', 'method' => 'handleEvent'));
     }
 
     public function testServiceWiring()
     {
-        if(Kernel::MAJOR_VERSION >= 5){
+        if (Kernel::MAJOR_VERSION >= 5) {
             $this->markTestSkipped('PropelBundle has incomplete support of SF5');
         }
 
@@ -76,12 +76,12 @@ class SymfonyServicesTest extends WebTestCase
         $def = $c->register('test.events1', 'Glorpen\Propel\PropelBundle\Tests\Fixtures\Services\EventTester');
         $def->setPublic(true);
         $def->addArgument(new Reference('glorpen.propel.event.dispatcher'));
-        $def->addTag('propel.event', array('event'=>'model.save', 'method'=>'handleEvent'));
+        $def->addTag('propel.event', array('event' => 'model.save', 'method' => 'handleEvent'));
     }
 
     public function testPublicCircularDependencies()
     {
-        if(Kernel::MAJOR_VERSION >= 5){
+        if (Kernel::MAJOR_VERSION >= 5) {
             $this->markTestSkipped('PropelBundle has incomplete support of SF5');
         }
 
@@ -98,7 +98,7 @@ class SymfonyServicesTest extends WebTestCase
         /* @var $def \Symfony\Component\DependencyInjection\Definition */
         $def->setPublic(false);
         $def->addArgument(new Reference('glorpen.propel.event.dispatcher'));
-        $def->addTag('propel.event', array('event'=>'model.save', 'method'=>'handleEvent'));
+        $def->addTag('propel.event', array('event' => 'model.save', 'method' => 'handleEvent'));
 
         $def = $c->register('test.events_tracker', 'Glorpen\Propel\PropelBundle\Tests\Fixtures\Services\EventTester');
         $def->setPublic(true);
@@ -107,7 +107,7 @@ class SymfonyServicesTest extends WebTestCase
 
     public function testPrivateCircularDependencies()
     {
-        if(Kernel::MAJOR_VERSION >= 5){
+        if (Kernel::MAJOR_VERSION >= 5) {
             $this->markTestSkipped('PropelBundle has incomplete support of SF5');
         }
 
