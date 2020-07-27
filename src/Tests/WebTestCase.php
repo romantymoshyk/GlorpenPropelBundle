@@ -2,7 +2,16 @@
 
 namespace Glorpen\Propel\PropelBundle\Tests;
 
-abstract class WebTestCase extends \Symfony\Bundle\FrameworkBundle\Test\WebTestCase
-{
-    use \Symfony\Bridge\PhpUnit\SetUpTearDownTrait;
+// A trait to provide forward compatibility with newest PHPUnit versions
+$r = new \ReflectionClass('\Symfony\Bundle\FrameworkBundle\Test\WebTestCase');
+if (PHP_VERSION_ID < 70000 || !$r->getMethod('tearDown')->hasReturnType()) {
+    abstract class WebTestCase extends \Symfony\Bundle\FrameworkBundle\Test\WebTestCase
+    {
+        use SetUpTearDownTraitForV5;
+    }
+} else {
+    abstract class WebTestCase extends \Symfony\Bundle\FrameworkBundle\Test\WebTestCase
+    {
+        use SetUpTearDownTraitForV8;
+    }
 }

@@ -10,55 +10,68 @@
 namespace Glorpen\Propel\PropelBundle\Tests;
 
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\DependencyInjection\Compiler\PassConfig;
+use Symfony\Component\HttpKernel\Kernel;
 
 class TestKernel extends Kernel
 {
     protected $debug = true;
-    
     private $containerBuilder;
-    
+    private $name;
+
     private static $nameSeed = 0;
-    
+
     public function getName()
     {
         if (null === $this->name) {
             self::$nameSeed++;
             $this->name = 'test_'.self::$nameSeed;
         }
-        
+
         return $this->name;
     }
-    
+
     public function getCacheDir()
     {
         return parent::getCacheDir().'/'.$this->getName();
     }
-    
+
     public function registerBundles()
     {
         $bundles = array(
-                new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-                new \Propel\PropelBundle\PropelBundle(),
-                new \Glorpen\Propel\PropelBundle\GlorpenPropelBundle(),
+            new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+            new \Glorpen\Propel\PropelBundle\GlorpenPropelBundle(),
         );
-    
+
+        if (Kernel::MAJOR_VERSION < 4.4) {
+            $bundles[] = new \Propel\PropelBundle\PropelBundle();
+        } else {
+            $bundles[] = new \Propel\PropelBundle\PropelBundle();
+        }
+
         return $bundles;
     }
-    
+
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(realpath(__DIR__.'/Resources/config').'/config_'.$this->getEnvironment().'.yml');
+        $path =
+            sprintf(
+                '%s/Resources/config/config_%s%s.yml',
+                __DIR__,
+                $this->getEnvironment(),
+                Kernel::MAJOR_VERSION >= 5 ? '_v5' : ''
+            );
+
+        $loader->load(realpath($path));
     }
-    
+
     public function getRootDir()
     {
         return realpath(__DIR__.'/../..').'/test-app';
     }
-    
+
     /**
      * For symfony 3.3 and Propel 1
      * @param ContainerBuilder $container
@@ -69,16 +82,16 @@ class TestKernel extends Kernel
         if ($this->containerBuilder) {
             call_user_func($this->containerBuilder, $container);
         }
-        
+
         // Fix services from Propel 1
         $container->addCompilerPass(new FixingCompilerPass(), PassConfig::TYPE_BEFORE_REMOVING, 1000);
     }
-    
+
     public function setContainerBuilder($callback)
     {
         $this->containerBuilder = $callback;
     }
-    
+
     /**
      * For symfony 2.3
      * @param ContainerBuilder $container
@@ -88,7 +101,7 @@ class TestKernel extends Kernel
         parent::prepareContainer($container);
         $this->build($container);
     }
-    
+
     public function shutdown()
     {
         parent::shutdown();

@@ -74,9 +74,9 @@ class SymfonyServicesTest extends WebTestCase
         $def->addTag('propel.event', array('event'=>'model.save', 'method'=>'handleEvent'));
     }
 
-    public function testPublicCircuralDependencies()
+    public function testPublicCircularDependencies()
     {
-        $c = $this->prepareEventTester(array($this, 'builderForTestPublicCircuralDependencies'));
+        $c = $this->prepareEventTester(array($this, 'builderForTestPublicCircularDependencies'));
 
         $te = $c->get('test.events1');
         $this->assertNotNull($te->arg1, 'EventDispatcher was injected');
@@ -98,7 +98,7 @@ class SymfonyServicesTest extends WebTestCase
 
     public function testPrivateCircularDependencies()
     {
-        $c = $this->prepareEventTester(array($this, 'builderForTestPrivateCircuralDependencies'));
+        $c = $this->prepareEventTester(array($this, 'builderForTestPrivateCircularDependencies'));
 
         $te = $c->get('test.events_tracker')->arg1;
 
