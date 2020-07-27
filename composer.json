@@ -21,5 +21,10 @@
             "Glorpen\\Propel\\PropelBundle\\": "src/"
         },
         "exclude-from-classmap": [ "/src/Tests" ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Glorpen\\Propel\\PropelBundle\\Tests": "src/Tests"
+        },
     }
 }
