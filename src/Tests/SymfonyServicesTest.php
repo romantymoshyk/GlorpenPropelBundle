@@ -16,6 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Glorpen\Propel\PropelBundle\Dispatcher\EventDispatcherProxy;
 use Glorpen\Propel\PropelBundle\Events\ModelEvent;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * @author Arkadiusz Dzięgiel
@@ -61,6 +62,10 @@ class SymfonyServicesTest extends WebTestCase
 
     public function testServiceWiring()
     {
+        if(Kernel::MAJOR_VERSION >= 5){
+            $this->markTestSkipped('PropelBundle has incomplete support of SF5');
+        }
+
         $c = $this->prepareEventTester(array($this, 'builderForTestServiceWiring'));
 
         $this->assertNotNull($c->get('test.events1')->handledEvent, 'Event was handled');
@@ -76,6 +81,10 @@ class SymfonyServicesTest extends WebTestCase
 
     public function testPublicCircularDependencies()
     {
+        if(Kernel::MAJOR_VERSION >= 5){
+            $this->markTestSkipped('PropelBundle has incomplete support of SF5');
+        }
+
         $c = $this->prepareEventTester(array($this, 'builderForTestPublicCircularDependencies'));
 
         $te = $c->get('test.events1');
@@ -98,6 +107,10 @@ class SymfonyServicesTest extends WebTestCase
 
     public function testPrivateCircularDependencies()
     {
+        if(Kernel::MAJOR_VERSION >= 5){
+            $this->markTestSkipped('PropelBundle has incomplete support of SF5');
+        }
+
         $c = $this->prepareEventTester(array($this, 'builderForTestPrivateCircularDependencies'));
 
         $te = $c->get('test.events_tracker')->arg1;

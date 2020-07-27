@@ -19,7 +19,7 @@ class TestKernel extends Kernel
 {
     protected $debug = true;
     private $containerBuilder;
-    private $name;
+    protected $name;
 
     private static $nameSeed = 0;
 
