@@ -24,7 +24,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Glorpen\\Propel\\PropelBundle\\Tests": "src/Tests"
+            "Glorpen\\Propel\\PropelBundle\\": "src/"
         }
     }
 }
